@@ -15,6 +15,8 @@ import { ICenterOn, Props, State } from './image-zoom.type';
 export default class ImageViewer extends React.Component<Props, State> {
   public static defaultProps = new Props();
   public state = new State();
+  // @ts-ignore
+  props: Props;
 
   // 上次/当前/动画 x 位移
   private lastPositionX: number | null = null;
@@ -37,6 +39,7 @@ export default class ImageViewer extends React.Component<Props, State> {
 
   // 上次手按下去的时间
   private lastTouchStartTime: number = 0;
+  private lastClickTimeEnter: number = 0;
 
   // 滑动过程中，整体横向过界偏移量
   private horizontalWholeOuterCounter = 0;
