@@ -726,6 +726,7 @@ export default class ImageViewer extends React.Component<Props, State> {
 
     const parentStyles = StyleSheet.flatten(this.props.style);
 
+    const panHandlers = this.imagePanResponder ? this.imagePanResponder.panHandlers : {};
     return (
       <View
         style={{
@@ -734,7 +735,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           width: this.props.cropWidth,
           height: this.props.cropHeight
         }}
-        {...this.imagePanResponder!.panHandlers}
+        {...panHandlers}
       >
         <Animated.View style={animateConf} renderToHardwareTextureAndroid={this.props.useHardwareTextureAndroid}>
           <View
