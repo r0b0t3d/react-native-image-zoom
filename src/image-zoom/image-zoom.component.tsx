@@ -139,7 +139,7 @@ export default class ImageViewer extends React.Component<Props, State> {
 
 }
 
-  public componentWillMount() {
+  public componentDidMount() {
     this.imagePanResponder = PanResponder.create({
       // 要求成为响应者：
       onStartShouldSetPanResponder:  (evt) => {
@@ -148,6 +148,7 @@ export default class ImageViewer extends React.Component<Props, State> {
             this.onDoubleClick(evt)
         }        
         this.lastClickTimeEnter = new Date().getTime();
+        // @ts-ignore
         return  this.animatedScale._value !== 1 ? true :  evt.nativeEvent.changedTouches.length > 1 ? true : false; 
     },
       onPanResponderTerminationRequest: () => false,
@@ -530,6 +531,10 @@ export default class ImageViewer extends React.Component<Props, State> {
         //
       }
     });
+    
+    if (this.props.centerOn) {
+      this.centerOn(this.props.centerOn);
+    }
   }
 
   public resetScale = () => {
@@ -630,12 +635,6 @@ export default class ImageViewer extends React.Component<Props, State> {
 
     this.imageDidMove('onPanResponderRelease');
   };
-
-  public componentDidMount() {
-    if (this.props.centerOn) {
-      this.centerOn(this.props.centerOn);
-    }
-  }
 
   public componentWillReceiveProps(nextProps: Props) {
     // Either centerOn has never been called, or it is a repeat and we should ignore it

@@ -179,6 +179,7 @@ export class Props {
   public onSwipeDown?: () => void = () => {
     //
   };
+  children: any;
 }
 
 export class State {
